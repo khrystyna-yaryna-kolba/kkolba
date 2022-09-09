@@ -51,28 +51,19 @@ def static_permutations(n, k):
             ans+=1
     return ans
 
-#in case using library function is forbidden
+
 #second version
-def static_permute(n, k):
-    res = [0]
-    backtracking(res,set(),[],range(1,n+1), k)
-    return res[0]
-def backtracking(res,visited,subset,nums, k):
-    if len(subset) == len(nums):
-        count=0
-        for j in range(n):
-            if subset[j]==j+1:
-                count+=1
-        if count==k:
-            res[0]+=1
-    for i in range(len(nums)):
-        if i not in visited:
-            visited.add(i)
-            backtracking(res,visited,subset+[nums[i]],nums,k)
-            visited.remove(i)
+def mathem_permutes(n, k):#derangements
+    import math
+    c = math.factorial(n)/(math.factorial(k)*math.factorial(n-k))
+    subfactorial = 0
+    for i in range(n-k+1):
+        subfactorial= subfactorial + int(((-1)**i)*math.factorial(n-k)/math.factorial(i))
+    return int(c*subfactorial)
+
 #printing answer
-#without library function
-print(static_permute(n, k))
-#or
-#more effective
+#brute force
 print(static_permutations(n, k))
+
+#the best,mathematical, but harder to understand
+print(mathem_permutes(n, k))
