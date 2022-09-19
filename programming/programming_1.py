@@ -28,9 +28,18 @@ def input_int(text):
 #entering list using two different ways
 def entering_list():
     while True:
+<<<<<<< Updated upstream
         choice = input("enter your choice \n 1 - random generating \n 2 - manual input \n 3 - break and try again \n 4 - stop entering list (return []) \n")
         if choice=="1":
             N=input_int("N - length of list")
+=======
+        choice = input("enter your choice \n 1 - random generating \n 2 - manual input \n  3- (return []) \n")
+        if choice=="1":
+            N=input_int("N - length of list")
+            while N<0:
+                print("N should be greater than zero")
+                N=input_int("N - length of list")
+>>>>>>> Stashed changes
             while True:
                 a=input_int("a (a<=b)")
                 b=input_int("b (a<=b)")
@@ -41,9 +50,18 @@ def entering_list():
             return lis
         elif choice=="2":
             N=input_int("N")
+<<<<<<< Updated upstream
             lis=input_list(N)
             return lis
         elif choice=="4":
+=======
+            while N<0:
+                print("N should be greater than zero")
+                N=input_int("N - length of list")
+            lis=input_list(N)
+            return lis
+        elif choice=="3":
+>>>>>>> Stashed changes
             return []
         else:
             continue
