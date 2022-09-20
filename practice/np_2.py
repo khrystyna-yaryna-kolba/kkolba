@@ -1,16 +1,16 @@
 import random
 #generating random list of length N with integer values in range [a, b]
-def random_generating(N, a, b):
+def random_float_list_generating(N, a, b):
     list = []
     for i in range(N):
-        list.append(random.randrange(a, b+1))
+        list.append(round(random.uniform(a, b+1), 2))
     return list
 
 #manual input of list of integers of length N
-def input_list(N):
+def input_float_list(N):
     lis = []
     for i in range(N):
-        n = input_int("list[{}]".format(i))
+        n = input_num("list[{}]".format(i))
         lis.append(n)
     return lis
 
@@ -24,6 +24,15 @@ def input_int(text):
         return input_int(text)
     return n
 
+#function to simplify entering valid number
+def input_num(text):
+    n=input("enter number {} \n".format(text))
+    try:
+        n=float(n)
+    except:
+        print("you didn't enter a number, try again")
+        return input_num(text)
+    return n
 
 #bubble sort
 def bubble_sort(arr):
@@ -78,7 +87,7 @@ def binary_search(lis, value):
 
 #entering list using two different ways
 #interface
-def entering_list():
+def entering_float_list():
     while True:
         choice = input("enter your choice \n 1 - random generating \n 2 - manual input \n 3 - (return []) \n")
         if choice=="1":
@@ -87,19 +96,19 @@ def entering_list():
                 print("N should be greater than zero")
                 N=input_int("N - length of list")
             while True:
-                a=input_int("a (a<=b)")
-                b=input_int("b (a<=b)")
+                a=input_num("a (a<=b)")
+                b=input_num("b (a<=b)")
                 if a<=b:
                     break
                 print("a>b, try again")
-            lis = random_generating(N,a,b)
+            lis = random_float_list_generating(N,a,b)
             return lis
         elif choice=="2":
             N=input_int("N")
             while N<0:
                 print("N should be greater than zero")
                 N=input_int("N - length of list")
-            lis=input_list(N)
+            lis=input_float_list(N)
             return lis
         elif choice=="3":
             return []
@@ -113,12 +122,12 @@ def entering_list():
 
 
 #main
-lis = entering_list()
+lis = entering_float_list()
 while True:
     print(lis)
     choice = input("enter your choice \n 1 - binary search \n 2 - return to creating list \n 3 - exit \n")
     if choice=="1":
-        val = input_int("val to search")
+        val = input_num("val to search")
         existence, count,comparisons_count, num_of_swaps, num_of_comparisons = binary_search(lis, val)
         print("existence of given val in the list(index or False): {}".format(existence))
         print("number of steps to perform that search: {}".format(count))
@@ -126,7 +135,7 @@ while True:
         print("number of swaps to perform bubble sorting before binary search: {}".format(num_of_swaps))
         print("number of comparisons to perform bubble sorting before binary search: {}".format(num_of_comparisons))
     elif choice=="2":
-        lis = entering_list()
+        lis = entering_float_list()
         continue
     elif choice=="3":
         exit()
