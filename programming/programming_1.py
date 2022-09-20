@@ -24,17 +24,26 @@ def input_int(text):
         return input_int(text)
     return n
 
+#function to simplify entering valid integer
+def input_positive_int(text):
+    n=input("enter positive integer {} \n".format(text))
+    try:
+        n=int(n)
+        if n<0:
+            print("you entered number that is less than zero")
+            return input_positive_int(text)
+    except:
+        print("you didn't enter an integer, try again")
+        return input_positive_int(text)
+    return n
 
 #entering list using two different ways
 def entering_list():
     while True:
-        
+
         choice = input("enter your choice \n 1 - random generating \n 2 - manual input \n  3- (return []) \n")
         if choice=="1":
-            N=input_int("N - length of list")
-            while N<0:
-                print("N should be greater than zero")
-                N=input_int("N - length of list")
+            N=input_positive_int("N - length of list")
             while True:
                 a=input_int("a (a<=b)")
                 b=input_int("b (a<=b)")
@@ -44,10 +53,7 @@ def entering_list():
             lis = random_generating(N,a,b)
             return lis
         elif choice=="2":
-            N=input_int("N")
-            while N<0:
-                print("N should be greater than zero")
-                N=input_int("N - length of list")
+            N=input_positive_int("N")
             lis=input_list(N)
             return lis
         elif choice=="3":
@@ -55,12 +61,19 @@ def entering_list():
         else:
             continue
 
+#helping function to create number of given group(negative, positive or zero)
+def get_group_num(group):
+    if group>0:
+        return random.randrange(1, 50)
+    elif group<0:
+        return random.randrange(-50, -1)
+    else:
+        return 0
 
 def tranform(list, k):
     negative = []
     positive = []
     zeros = []
-
     #filling three lists to maintain the order
     for i in list:
         if i<0:
@@ -78,16 +91,6 @@ def tranform(list, k):
         missing_group=1
     elif len(zeros)==0:
         missing_group=0
-
-    #helping function to create number of given group(negative, positive or zero)
-    def get_group_num(group):
-        if group>0:
-            return random.randrange(1, 50)
-        elif group<0:
-            return random.randrange(-50, -1)
-        else:
-            return 0
-
     #inserting random elements of missing group after each k
     #(as in the instructions)
     if missing_group!=None:
@@ -103,7 +106,6 @@ def tranform(list, k):
             for i in range(len(zeros)):
                 if zeros[i]==k:
                     zeros.insert(i+1, get_group_num(missing_group))
-
     #concatenating parts to get final result
     result = negative + positive + zeros
     return result
