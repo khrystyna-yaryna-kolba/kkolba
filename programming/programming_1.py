@@ -37,6 +37,15 @@ def input_positive_int(text):
         return input_positive_int(text)
     return n
 
+def input_int_range():
+    print("[a,b]")
+    a=input_int("a (a<=b)")
+    b=input_int("b (a<=b)")
+    if a>b:
+        print("a>b, try again")
+        return input_int_range()
+    return a,b
+
 #entering list using two different ways
 def entering_list():
     while True:
@@ -44,12 +53,7 @@ def entering_list():
         choice = input("enter your choice \n 1 - random generating \n 2 - manual input \n  3- (return []) \n")
         if choice=="1":
             N=input_positive_int("N - length of list")
-            while True:
-                a=input_int("a (a<=b)")
-                b=input_int("b (a<=b)")
-                if a<=b:
-                    break
-                print("a>b, try again")
+            a,b = input_int_range()
             lis = random_generating(N,a,b)
             return lis
         elif choice=="2":
