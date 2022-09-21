@@ -127,7 +127,7 @@ while True:
         print("list:",lis)
         print("transformed list:", result)
     elif choice=="2":
-        lis = entering_float_list()
+        lis = entering_list()
         continue
     elif choice=="3":
         exit()
