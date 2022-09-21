@@ -117,8 +117,19 @@ def tranform(list, k):
     Числа 7 і 6 - рандомні, після кожного -5.
 """
 #main
-list = entering_list()
-k = input_int("k")
-result=tranform(list, k)
-print("list:",list)
-print("transformed list:", result)
+lis = entering_list()
+while True:
+    print(lis)
+    choice = input("enter your choice \n 1 - tranform \n 2 - return to creating list \n 3 - exit \n")
+    if choice=="1":
+        k = input_int("k")
+        result=tranform(lis, k)
+        print("list:",lis)
+        print("transformed list:", result)
+    elif choice=="2":
+        lis = entering_float_list()
+        continue
+    elif choice=="3":
+        exit()
+    else:
+        continue
