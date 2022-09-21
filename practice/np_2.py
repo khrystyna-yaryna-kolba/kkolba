@@ -3,7 +3,7 @@ import random
 def random_float_list_generating(N, a, b):
     list = []
     for i in range(N):
-        list.append(round(random.uniform(a, b+1), 2))
+        list.append(round(random.uniform(a, b), 2))
     return list
 
 #manual input of list of integers of length N
@@ -34,6 +34,29 @@ def input_num(text):
         return input_num(text)
     return n
 
+#function to simplify entering valid integer
+def input_positive_int(text):
+    n=input("enter positive integer {} \n".format(text))
+    try:
+        n=int(n)
+        if n<0:
+            print("you entered number that is less than zero")
+            return input_positive_int(text)
+    except:
+        print("you didn't enter an integer, try again")
+        return input_positive_int(text)
+    return n
+
+
+def input_range():
+    print("[a,b]")
+    a=input_num("a (a<=b)")
+    b=input_num("b (a<=b)")
+    if a>b:
+        print("a>b, try again")
+        return input_range()
+    return a,b
+
 #bubble sort
 def bubble_sort(arr):
     n = len(arr)
@@ -54,7 +77,6 @@ def bubble_sort(arr):
 #binary search
 #return ( if exist , count of operations to complete that search )
 def binary_search(lis, value):
-    import math
     li=lis.copy()
     num_of_swaps, num_of_comparisons, initial_indexes  = bubble_sort(li)
     operations_count = 0 #operation is setting new values for variables
@@ -91,23 +113,12 @@ def entering_float_list():
     while True:
         choice = input("enter your choice \n 1 - random generating \n 2 - manual input \n 3 - (return []) \n")
         if choice=="1":
-            N=input_int("N - length of list")
-            while N<0:
-                print("N should be greater than zero")
-                N=input_int("N - length of list")
-            while True:
-                a=input_num("a (a<=b)")
-                b=input_num("b (a<=b)")
-                if a<=b:
-                    break
-                print("a>b, try again")
+            N=input_positive_int("N - length of list")
+            a,b = input_range()
             lis = random_float_list_generating(N,a,b)
             return lis
         elif choice=="2":
-            N=input_int("N")
-            while N<0:
-                print("N should be greater than zero")
-                N=input_int("N - length of list")
+            N=input_positive_int("N")
             lis=input_float_list(N)
             return lis
         elif choice=="3":
