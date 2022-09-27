@@ -73,7 +73,7 @@ class LinkedList:
             temp = self.head
             self.head = self.head.next
             if self._len ==1:
-                self.tail ==self.head
+                self.tail =self.head
             del temp
         else:
             cur_node = self.head
@@ -170,4 +170,3 @@ class LinkedList:
 
 
         return result
-
