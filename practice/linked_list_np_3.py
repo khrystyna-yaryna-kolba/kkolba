@@ -51,6 +51,8 @@ class LinkedList:
             new_head = Node(data)
             new_head.next = self.head
             self.head = new_head
+            if self._len == 0:
+                self.tail = self.head
         elif position == self._len:
             new_tail = Node(data)
             self.tail.next = new_tail
@@ -70,14 +72,16 @@ class LinkedList:
         if position == 0:
             temp = self.head
             self.head = self.head.next
-            del self.head
+            if self._len ==1:
+                self.tail ==self.head
+            del temp
         else:
             cur_node = self.head
             for i in range(position-1):
                 cur_node = cur_node.next
             to_del = cur_node.next
             cur_node.next = cur_node.next.next
-            del cur_node.next
+            del to_del
             if position == self._len - 1:
                 self.tail = self.tail.next
         self._len -= 1
