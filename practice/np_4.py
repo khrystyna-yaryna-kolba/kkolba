@@ -57,8 +57,8 @@ def menu():
             lis = LinkedList()
             n = input_non_negative_int("num of generated numbers")
             a, b = input_int_range()
-            it = RandomIterator(n, a, b)
-            iterator = iter(it)
+            iterator = RandomIterator(n, a, b)
+            #iterator = iter(iterator)
             print("using iterator...")
             for i in iterator:
                 print(i)
