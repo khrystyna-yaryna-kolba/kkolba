@@ -16,7 +16,7 @@ def entering_list():
             for i in generator:
                 print(i)
                 lis.append(i)
-        elif choice =="5":
+        elif choice =="4":
             iterator = RandomIterator(N, a, b)
             # iterator = iter(iterator)
             print("using iterator...")
