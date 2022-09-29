@@ -2,11 +2,27 @@ from linked_list import *
 from random_generator import *
 from random_iterator import *
 def entering_list():
-    choice = input("enter your choice \n 1 - random generating \n 2 - manual input \n 3- (return []) \n")
-    if choice=="1":
+    choice = input("enter your choice \n 1 - random generating \n 2 - manual input \n 3 - generate random nums in "
+                   "range with generator \n 4 - generate random nums in range with iterator \n 5 - (return []) \n")
+    if choice=="1" or choice=="3" or choice=="4":
         N=input_non_negative_int("N - length of list")
         a,b = input_int_range()
-        lis = LinkedList.random_generating(N,a,b)
+        lis = LinkedList()
+        if choice =="1":
+            lis = LinkedList.random_generating(N,a,b)
+        elif choice =="3":
+            generator = random_generator(N, a, b)
+            print("using generator...")
+            for i in generator:
+                print(i)
+                lis.append(i)
+        elif choice =="5":
+            iterator = RandomIterator(N, a, b)
+            # iterator = iter(iterator)
+            print("using iterator...")
+            for i in iterator:
+                print(i)
+                lis.append(i)
         return lis
     elif choice=="2":
         N=input_non_negative_int("N")
@@ -20,12 +36,11 @@ def entering_list():
 
 
 def menu():
-    lis = LinkedList()
+    lis = entering_list()
     while True:
-        #lis.print()
-        choice = input("enter your choice \n 1 - tranform \n 2 - enter list(random or input) \n 3 - insert \n 4 - remove "
-                       "\n 5 - generate random numbers in range with generator \n 6 - generate random numbers in "
-                       "range with iterator \n 7 - print list \n 8 - exit \n")
+        # lis.print()
+        choice = input("enter your choice \n 1 - tranform \n 2 - return to creating list \n 3 - insert \n 4 - "
+                       "remove \n 5 - print list \n 6 - exit \n")
         if choice == "1":
             k = input_int("k")
             result = LinkedList.transform(lis, k)
@@ -44,29 +59,8 @@ def menu():
             pos = input_int("position to remove")
             lis.remove(pos)
         elif choice == "5":
-            lis = LinkedList()
-            n = input_non_negative_int("num of generated numbers")
-            a, b = input_int_range()
-            generator = random_generator(n, a, b)
-            print("using generator...")
-            for i in generator:
-                print(i)
-                lis.append(i)
-            #lis.print()
-        elif choice == "6":
-            lis = LinkedList()
-            n = input_non_negative_int("num of generated numbers")
-            a, b = input_int_range()
-            iterator = RandomIterator(n, a, b)
-            #iterator = iter(iterator)
-            print("using iterator...")
-            for i in iterator:
-                print(i)
-                lis.append(i)
-            #lis.print()
-        elif choice == "7":
             lis.print()
-        elif choice == "8":
+        elif choice == "6":
             exit()
         else:
             continue
