@@ -1,4 +1,4 @@
-from linked_list_np_3 import *
+from linked_list import *
 
 def entering_list():
     choice = input("enter your choice \n 1 - random generating \n 2 - manual input \n 3- (return []) \n")
@@ -22,7 +22,7 @@ def menu():
     lis = entering_list()
     while True:
         lis.print()
-        choice = input("enter your choice \n 1 - tranform \n 2 - return to creating list \n 3 - exit \n")
+        choice = input("enter your choice \n 1 - tranform \n 2 - return to creating list \n 3 - insert \n 4 - remove \n 5 - exit \n")
         if choice == "1":
             k = input_int("k")
             result = LinkedList.transform(lis, k)
@@ -34,6 +34,13 @@ def menu():
             lis = entering_list()
             continue
         elif choice == "3":
+            pos = input_int("position to insert")
+            data = input_int("data to insert)")
+            lis.insert(pos,data)
+        elif choice == "4":
+            pos = input_int("position to remove")
+            lis.remove(pos)
+        elif choice == "5":
             exit()
         else:
             continue
