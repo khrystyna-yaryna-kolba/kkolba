@@ -1,6 +1,20 @@
 from linked_list import *
 from random_generator import *
 from random_iterator import *
+
+def generate_random_list_with_generator(n, a , b):
+    lis = LinkedList()
+    generator = random_generator(n, a, b)
+    for i in generator:
+        lis.append(i)
+    return lis
+
+def generate_random_list_with_iterator(n, a , b):
+    lis = LinkedList()
+    iterator = RandomIterator(n, a, b)
+    for i in iterator:
+        lis.append(i)
+    return lis
 def entering_list():
     choice = input("enter your choice \n 1 - random generating \n 2 - manual input \n 3 - generate random nums in "
                    "range with generator \n 4 - generate random nums in range with iterator \n 5 - (return []) \n")
@@ -11,18 +25,11 @@ def entering_list():
         if choice =="1":
             lis = LinkedList.random_generating(N,a,b)
         elif choice =="3":
-            generator = random_generator(N, a, b)
             print("using generator...")
-            for i in generator:
-                print(i)
-                lis.append(i)
+            lis = generate_random_list_with_generator(N,a,b)
         elif choice =="4":
-            iterator = RandomIterator(N, a, b)
-            # iterator = iter(iterator)
             print("using iterator...")
-            for i in iterator:
-                print(i)
-                lis.append(i)
+            lis = generate_random_list_with_iterator(N,a,b)
         return lis
     elif choice=="2":
         N=input_non_negative_int("N")
