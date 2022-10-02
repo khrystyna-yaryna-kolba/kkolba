@@ -1,0 +1,18 @@
+Container: 
+ID : 124454
+number : KB-12345
+departure_city : London
+arrival_city : Los Angeles
+departure_date : 2022-09-29
+arrival_date : 2022-09-30
+amount_of_items : 3
+
+Container: 
+ID : 123454
+number : FD-00745
+departure_city : Lviv
+arrival_city : Kyiv
+departure_date : 2022-09-27
+arrival_date : 2023-10-05
+amount_of_items : 0
+
