@@ -35,7 +35,7 @@ def entering_list():
         N=input_non_negative_int("N")
         lis=LinkedList.input_int_list(N)
         return lis
-    elif choice=="3":
+    elif choice=="5":
         return LinkedList()
     else:
         return entering_list()
