@@ -48,7 +48,7 @@ class ContainerCollection:
             return
         def get_attr(x):
             attr = getattr(x, sorting_attr)
-            if type(attr)=="str":
+            if isinstance(attr, str):
                 return attr.lower()
             else:
                 return attr
