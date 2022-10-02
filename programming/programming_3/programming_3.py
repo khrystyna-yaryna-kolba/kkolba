@@ -1,17 +1,6 @@
 from container_collection import ContainerCollection
 from container import Container
 import sys
-
-"""test = ContainerCollection()
-test.read_json_file("data.json")
-test.sort("arrival_date")
-test.edit_by_id("123454", "departure_city", "Kyiv")
-test.write_to_json_file("test.json")
-test[0].add_to_json_file("test.json")
-print(test.search("Pari"))
-test.read_json_file("test.json")
-print(test)"""
-
 def menu():
     containers = ContainerCollection()
     while True:

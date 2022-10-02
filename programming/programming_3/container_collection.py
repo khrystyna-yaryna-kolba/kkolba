@@ -20,7 +20,7 @@ class ContainerCollection:
     def __str__(self):
         return "\n".join([i.__str__() for i in self._collection])
     def delete_by_id(self, id):
-        if not id in self._ids:
+        if not Validation.if_id_exist(self, id):
             print("container with such id does not exist")
             return
         for el in self._collection:
