@@ -105,10 +105,3 @@ class Container:
     def input_container(*args):
         d = dict((prop, input(prop + " : ")) for prop in args)
         return d
-
-
-
-#cont = Container(**Container.input_container("number", "amount_of_items"))
-#cont.departure_city="LONDON"
-#cont.arrival_date="27.09.2022"
-#print(cont)

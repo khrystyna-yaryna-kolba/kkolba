@@ -87,6 +87,3 @@ class Validation:
             return True
         else:
             return False
-
-#test = Validation.validate_file_name("data.json", "json")
-#print(test)
