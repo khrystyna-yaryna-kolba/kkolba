@@ -8,7 +8,9 @@ def menu():
             choice = input("enter your choice \n 1 - read from file \n 2 - search in the current collection of containers "
                        "\n 3 - add new Container to current collection \n 4 - print current collection \n 5 - sort "
                        "collection by property(number by default) \n 6 - delete Container from collection by ID \n 7 "
-                       "- edit container by ID \n 8 - write to json file \n 9 - write to txt file \n 10 - exit \n")
+                       "- edit container by ID \n 8 - write collection to json file \n 9 - write collection to txt "
+                           "file \n 10 - add new Container "
+                           "to txt file \n 11 - add new Container to json file \n 12 - exit \n")
             if choice=="1":
                 name = input("Input file name to read from(.json): \n")
                 containers.read_json_file(name)
@@ -37,17 +39,27 @@ def menu():
                 val = input("input new value for chosen property \n")
                 containers.edit_by_id(id, prop, val)
             elif choice =="8":
-                f = input("enter file name: ")
+                f = input("enter file name:(.json) \n")
                 containers.write_to_json_file(f)
             elif choice =="9":
-                f = input("enter file name: ")
+                f = input("enter file name:(.txt) \n")
                 containers.write_to_txt_file(f)
+            elif choice =="10":
+                el = Container(**Container.input_container(*Container.default_props()))
+                f = input("enter file name to add Container to:(.txt) \n")
+                el.add_to_text_file(f)
+            elif choice =="11":
+                el = Container(**Container.input_container(*Container.default_props()))
+                f = input("enter file name to add Container to:(.json) \n")
+                el.add_to_json_file(f)
+
+
         except:
             e = sys.exc_info()[1]
             print("Error: ", str(e))
             continue
 
-        if choice == "10":
+        if choice == "12":
             exit()
         else:
             continue

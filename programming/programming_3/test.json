@@ -34,5 +34,14 @@
         "departure_date": "2022-09-29",
         "arrival_date": "2022-09-30",
         "amount_of_items": "3"
+    },
+    {
+        "ID": "14644",
+        "number": "SD-23675",
+        "departure_city": "Lviv",
+        "arrival_city": "Paris",
+        "departure_date": "2016-07-07",
+        "arrival_date": "2016-08-08",
+        "amount_of_items": "87"
     }
 ]

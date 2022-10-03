@@ -20,39 +20,46 @@ class ContainerCollection:
     def __str__(self):
         return "\n".join([i.__str__() for i in self._collection])
     def delete_by_id(self, id):
-        if not Validation.if_id_exist(self, id):
-            print("container with such id does not exist")
-            return
-        for el in self._collection:
-            if el.ID == id:
-                self._collection.remove(el)
-                self._ids.remove(el.ID)
-                return
-    def edit_by_id(self, id, prop, new_value):
-        if not Validation.if_id_exist(self, id):
-            print("container with such id does not exist")
-            return
-        if not prop in Container.default_props():
-            print("invalid attribute, editing was not done")
-            return
-        for i, el in enumerate(self._collection):
-            if el.ID == id:
-                if prop == "ID":
+        try:
+            id = Validation.validate_collection_id(self, id)
+            for el in self._collection:
+                if el.ID == id:
+                    self._collection.remove(el)
                     self._ids.remove(el.ID)
-                    self._ids.add(id)
-                setattr(self._collection[i], prop, new_value)
-                return
+                    return
+        except KeyError as k:
+            print(k, "deletion was not completed")
+    def edit_by_id(self, id, prop, new_value):
+        try:
+            id = Validation.validate_collection_id(self, id)
+            for i, el in enumerate(self._collection):
+                if el.ID == id:
+                    prop = Validation.validate_property(el, prop)
+                    if prop == "ID":
+                        self._ids.remove(el.ID)
+                        new_value = Validation.validate_new_id(self, new_value)
+                        self._ids.add(new_value)
+                    setattr(self._collection[i], prop, new_value)
+                    return
+        except KeyError as k:
+            print(k, "editing was not completed")
+        except AttributeError as n:
+            print(n, "editing was not completed")
     def sort(self, sorting_attr = "number", reverse = False):
-        if not sorting_attr in Container.default_props():
-            print("invalid sorting attribute, sorting was not done")
-            return
-        def get_attr(x):
-            attr = getattr(x, sorting_attr)
-            if isinstance(attr, str):
-                return attr.lower()
-            else:
-                return attr
-        self._collection = sorted(self._collection, key= lambda x: get_attr(x), reverse= reverse)
+        try:
+            sorting_attr = Validation.validate_default_property(sorting_attr, Container.default_props())
+
+            # function helper to lambda
+            def get_attr(x):
+                attr = getattr(x, sorting_attr)
+                if isinstance(attr, str):
+                    return attr.lower()
+                else:
+                    return attr
+
+            self._collection = sorted(self._collection, key=lambda x: get_attr(x), reverse=reverse)
+        except AttributeError as n:
+            print(n, "sorting was not completed")
     def write_to_txt_file(self, name):
         name = Validation.validate_file_name(name, "txt")
         f = open(name, mode='w', encoding='utf-8')
@@ -69,11 +76,11 @@ class ContainerCollection:
             json.dump(res, f, indent=4)
         f.close()
     def read_json_file(self, name):
-        Validation.validate_file_name(name, "json")
+        name = Validation.validate_file_name(name, "json")
         try:
             f = open(name, encoding='utf-8')
         except FileNotFoundError as e:
-            print(str(e))
+            print("invalid file to read from", str(e))
             return
         self._collection = []
         self._ids.clear()
@@ -86,11 +93,12 @@ class ContainerCollection:
                 continue
         f.close()
     def add_element(self, elem):
-        if Validation.if_id_exist(self, elem.ID):
-            print("Container was not added! IDs of containers in collection must be unique")
-            return
-        self._collection.append(elem)
-        self._ids.add(elem.ID)
+        try:
+            elem.ID = Validation.validate_new_id(self, elem.ID)
+            self._collection.append(elem)
+            self._ids.add(elem.ID)
+        except KeyError as k:
+            print(k, "Container was not added! IDs of containers in collection must be unique")
 
 
 

@@ -82,8 +82,30 @@ class Validation:
 
 
     @staticmethod
-    def if_id_exist(collection, id):
-        if id in collection.get_ids():
-            return True
+    def validate_collection_id(collection, id):
+        if not id in collection.get_ids():
+            raise KeyError("element with id {} doesn`t exist in collection".format(id))
         else:
-            return False
+            return id
+
+    @staticmethod
+    def validate_new_id(collection, id):
+        if id in collection.get_ids():
+            raise KeyError("element with id {} already exists in collection".format(id))
+        else:
+            return id
+
+    @staticmethod
+    def validate_property(element, prop):
+        try:
+            getattr(element, prop)
+            return prop
+        except AttributeError:
+            raise AttributeError("property {} is not valid".format(prop))
+
+    @staticmethod
+    def validate_default_property(prop, default):
+        if not prop in default:
+            raise AttributeError("property {} is not valid".format(prop))
+        else:
+            return prop
