@@ -3,8 +3,11 @@ from validation import Validation
 import json
 class ContainerCollection:
     def __init__(self, *values):
-        self._collection = list(values[:])
+
+        self._collection = []
         self._ids = set()
+        for val in values:
+            self.add_element(val)
     def search(self, elem):
         found = ContainerCollection()
         for x in self._collection:
@@ -99,7 +102,5 @@ class ContainerCollection:
             self._ids.add(elem.ID)
         except KeyError as k:
             print(k, "Container was not added! IDs of containers in collection must be unique")
-
-
 
 
