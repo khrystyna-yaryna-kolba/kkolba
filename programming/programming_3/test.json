@@ -1,0 +1,47 @@
+[
+    {
+        "ID": "124454",
+        "number": "AB-12345",
+        "departure_city": "London",
+        "arrival_city": "Los Angeles",
+        "departure_date": "2022-09-29",
+        "arrival_date": "2022-09-30",
+        "amount_of_items": "3"
+    },
+    {
+        "ID": "035593",
+        "number": "AS-40644",
+        "departure_city": "Paris",
+        "arrival_city": "Berlin",
+        "departure_date": "2022-11-30",
+        "arrival_date": "2022-12-05",
+        "amount_of_items": "12"
+    },
+    {
+        "ID": "123454",
+        "number": "FD-00745",
+        "departure_city": "Kyiv",
+        "arrival_city": "Kyiv",
+        "departure_date": "2022-09-27",
+        "arrival_date": "2023-10-05",
+        "amount_of_items": "0"
+    },
+    {
+        "ID": "124454",
+        "number": "AB-12345",
+        "departure_city": "London",
+        "arrival_city": "Los Angeles",
+        "departure_date": "2022-09-29",
+        "arrival_date": "2022-09-30",
+        "amount_of_items": "3"
+    },
+    {
+        "ID": "14644",
+        "number": "SD-23675",
+        "departure_city": "Lviv",
+        "arrival_city": "Paris",
+        "departure_date": "2016-07-07",
+        "arrival_date": "2016-08-08",
+        "amount_of_items": "87"
+    }
+]

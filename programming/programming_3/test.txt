@@ -1,0 +1,19 @@
+Container:
+ID : 154594
+number : DF-65584
+departure_city : Lviv
+arrival_city : Paris
+departure_date : 2019-08-08
+arrival_date : 2020-08-08
+amount_of_items : 43
+
+Container: 
+ID : 45858484
+number : HJ-34843
+departure_city : Kyiv
+arrival_city : Lviv
+departure_date : 2020-08-08
+arrival_date : 2021-09-09
+amount_of_items : 23
+
+
