@@ -1,21 +1,21 @@
 [
   {
-    "ID" : "124454",
-    "number" : "KB-12345",
+    "ID" : "1d24454",
+    "number" : "KB12345",
     "departure_city" : "LONDON",
     "arrival_city": "LOS_ANGELES",
     "departure_date": "2022-09-29",
-    "arrival_date" : "2022-09-30",
+    "arrival_date" : "2022-09-27",
     "amount_of_items" : "3"
   },
   {
     "ID" : "123454",
     "number" : "FD-00745",
     "departure_city" : "LVIV",
-    "arrival_city": "KYIV",
+    "arrival_city": "KYIVa",
     "departure_date": "2022-09-27",
     "arrival_date" : "2023-10-05",
-    "amount_of_items" : "0"
+    "amount_of_items" : "-5"
   },
   {
     "ID" : "035593",

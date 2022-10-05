@@ -8,8 +8,15 @@ import json
 
 class Container:
     def __init__(self, **kwargs):
+        er = ""
         for prop, val in kwargs.items():
-            setattr(self, prop, val)
+            try:
+                setattr(self, prop, val)
+            except ValueError as e:
+                er+= "\n-- {}:\t".format(prop) + str(e)
+        if len(er)>0:
+            raise ValueError("Element Container can't be created: " + er)
+
     # id
     @property
     def ID(self):

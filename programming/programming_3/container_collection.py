@@ -92,7 +92,7 @@ class ContainerCollection:
             try:
                 self.add_element(Container(**container))
             except ValueError as e:
-                print(str(e), "in {} object in file".format(i))
+                print(str(e), "\nin {} object in file".format(i))
                 continue
         f.close()
     def add_element(self, elem):
