@@ -34,7 +34,7 @@ class SecondStrategy(Strategy):
                 lis.insert(pos, e)
                 pos+=1
             except ValueError as e:
-                print(str(e))
+                print("error in {} element in the file:".format(i), str(e))
                 continue
         f.close()
         return lis
