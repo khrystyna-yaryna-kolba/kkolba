@@ -3,9 +3,8 @@ from container import Container
 import sys
 
 def menu():
-
     containers = ContainerCollection()
-    
+
     while True:
         try:
             choice = input("enter your choice \n 1 - read from file \n 2 - search in the current collection of containers "
@@ -55,8 +54,6 @@ def menu():
                 el = Container(**Container.input_container(*Container.default_props()))
                 f = input("enter file name to add Container to:(.json) \n")
                 el.add_to_json_file(f)
-
-
         except:
             e = sys.exc_info()[1]
             print("Error: ", str(e))

@@ -113,7 +113,6 @@ class Container:
         except:
             f = open(name, "w")
             json.dump([self.props()], f, indent=4)
-
         f.close()
     @staticmethod
     def input_container(*args):
