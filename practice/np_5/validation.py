@@ -30,6 +30,11 @@ class Validation:
         return n
 
     @staticmethod
+    def validate_range(a,b):
+        if a>b:
+            return b,a
+        return a, b
+    @staticmethod
     def validate_file_name(name, type):
         if re.search(r"[^\\\\\/\*\:\?\"\<\>\|]+.{}$".format(type), name):
             return name

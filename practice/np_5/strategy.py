@@ -11,13 +11,14 @@ class Strategy(ABC):
 
 class FirstStrategy(Strategy):
     def generate(self, lis, pos, *argv):
-        n = argv[0]
-        a = argv[1]
-        b = argv[2]
+        n = Validation.validate_non_negative_int(argv[0])
+        a = Validation.validate_int(argv[1])
+        b = Validation.validate_int(argv[2])
+        a, b = Validation.validate_range(a, b)
         iterator = RandomIterator(n, a, b)
         for i in iterator:
             lis.insert(pos, i)
-            pos+=1
+            pos += 1
         return lis
 
 
