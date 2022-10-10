@@ -1,6 +1,6 @@
 from datetime import datetime
 import re
-#from strategy import *
+
 class Validation:
     @staticmethod
     def validate_int(val):

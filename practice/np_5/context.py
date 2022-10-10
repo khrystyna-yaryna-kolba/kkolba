@@ -10,6 +10,6 @@ class Context:
 
     @strategy.setter
     def strategy(self, strat):
-        if strat and not isinstance(strat, SecondStrategy) and not isinstance(strat,FirstStrategy):
-            raise ValueError("Not strategy object")
+        if strat is not None and not isinstance(strat, Strategy):
+            raise ValueError("Not strategy object. Error while trying initialize Context object")
         self._strategy = strat
