@@ -3,11 +3,6 @@ import re
 #from strategy import *
 class Validation:
     @staticmethod
-    def validate_strategy(s):
-        #if not isinstance(s, SecondStrategy) and not isinstance(s,FirstStrategy):
-        #    raise ValueError("Not strategy object")
-        return s
-    @staticmethod
     def validate_int(val):
         try:
             n = int(val)

@@ -46,7 +46,7 @@ class LinkedList:
         self._len += 1
     def insert(self,position, data):
         if position>self._len or position<0:
-            raise IndexError("invalid range. can`t perform inserting in list")
+            raise IndexError("invalid position. can`t perform inserting in list")
         if position == 0:
             new_head = Node(data)
             new_head.next = self.head

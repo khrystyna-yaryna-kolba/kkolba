@@ -10,5 +10,6 @@ class Context:
 
     @strategy.setter
     def strategy(self, strat):
-        strat = Validation.validate_strategy(strat)
+        if strat and not isinstance(strat, SecondStrategy) and not isinstance(strat,FirstStrategy):
+            raise ValueError("Not strategy object")
         self._strategy = strat
