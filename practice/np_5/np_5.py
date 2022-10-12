@@ -43,11 +43,11 @@ def use_strategy(lis, context):
         n = input_non_negative_int("input number of elements to generate: ")
         a, b = input_int_range()
         pos = input_non_negative_int("input pos: ")
-        lis = context.strategy.generate(lis, pos, n, a, b)
+        lis = context.execute_strategy(lis, pos, n, a, b)
     elif isinstance(context.strategy, SecondStrategy):
         f = Validation.validate_file_name(input("input file name to read from: "), "json")
         pos = input_non_negative_int("input pos: ")
-        lis = context.strategy.generate(lis, pos, f)
+        lis = context.execute_strategy(lis, pos, f)
     else:
         raise ValueError("context strategy is not valid, try to initialize it")
     return lis

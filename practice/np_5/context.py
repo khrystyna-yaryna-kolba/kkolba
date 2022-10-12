@@ -13,3 +13,8 @@ class Context:
         if strat is not None and not isinstance(strat, Strategy):
             raise ValueError("Not strategy object. Error while trying initialize Context object")
         self._strategy = strat
+
+    def execute_strategy(self, *args):
+        if self.strategy is None:
+            raise ValueError("Context object is not initialized with strategy yet!. Cannot perform strategy method!")
+        return self.strategy.generate(*args)
