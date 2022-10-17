@@ -12,7 +12,7 @@ def menu():
                        "\n 3 - add new Container to current collection \n 4 - print current collection \n 5 - sort "
                        "collection by property(number by default) \n 6 - delete Container from collection by ID \n 7 "
                        "- edit container by ID \n 8 - write collection to json file"
-                           "\n 9 - undo \n 10 - redo \n 11 - show history "
+                           "\n 9 - undo collection change \n 10 - redo collection change \n 11 - show history of collection changes "
                            "\n 12 - exit \n")
             if choice=="1":
                 name = input("Input file name to read from(.json): \n")
