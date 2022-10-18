@@ -1,11 +1,13 @@
 from container_collection import ContainerCollection
 from container import Container
 import sys
-from memento import Caretaker
+from memento import Caretaker, FileCaretaker
 def menu():
     containers = ContainerCollection()
     caretaker = Caretaker(containers)
     caretaker.backup("initial state of collection")
+    file_caretaker = None
+    f_contain = None
     while True:
         try:
             choice = input("enter your choice \n 1 - read from json file \n 2 - search in the current collection of containers "
@@ -23,6 +25,7 @@ def menu():
                 f = containers.search(s)
                 print("Results: \n")
                 print(f)
+                caretaker.backup("searching {}".format(s))
             elif choice == "3":
                 el = Container(**Container.input_container(*Container.default_props()))
                 containers.add_element(el)
@@ -30,12 +33,9 @@ def menu():
             elif choice=="4":
                 print(containers)
             elif choice =="5":
-                attr = input("property to sort by, -1 to perform default \n (valid: {}) \n".format(" ".join(Container.default_props())))
-                if attr =="-1":
-                    containers.sort()
-                else:
-                    containers.sort(attr)
-                caretaker.backup("sorting collection")
+                attr = input("property to sort by \n (valid: {}) \n".format(" ".join(Container.default_props())))
+                containers.sort(attr)
+                caretaker.backup("sorting collection {}".format(attr))
             elif choice =="6":
                 id = input("enter id that you want to delete: \n")
                 containers.delete_by_id(id)
@@ -48,11 +48,19 @@ def menu():
                 caretaker.backup("edited element in collection")
             elif choice =="8":
                 file = input("enter file name:(.json) \n")
+                if file_caretaker is None:
+                    f_contain = ContainerCollection()
+                    f_contain.read_json_file(file)
+                    file_caretaker = FileCaretaker(f_contain, file)
+                    file_caretaker.backup("initial backup")
+                caretaker.backup("write to file")
                 containers.write_to_json_file(file)
+                f_contain.read_json_file(file)
+                file_caretaker.backup("write to file")
             elif choice =="9":
-                caretaker.undo()
+                undo(file_caretaker, caretaker)
             elif choice =="10":
-                caretaker.redo()
+                redo(file_caretaker, caretaker, containers)
             elif choice == "11":
                 caretaker.show_history()
         except:
@@ -65,8 +73,16 @@ def menu():
         else:
             continue
 
+def undo(file_caretaker, caretaker):
+    if caretaker.get_last_change() == "write to file":
+        file_caretaker.undo()
+    caretaker.undo()
 
-
-
-
+def redo(file_caretaker, caretaker, containers):
+    if caretaker.get_next_change() == "write to file":
+        file_caretaker.redo()
+    elif caretaker.get_next_change().split()[0] == "searching":
+        print("Results: \n")
+        print(containers.search("".join(caretaker.get_next_change().split()[1:])))
+    caretaker.redo()
 menu()
