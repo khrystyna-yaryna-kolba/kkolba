@@ -10,7 +10,7 @@ class Booking:
             except ValueError as e:
                 er += "\n-- {}:\t".format(prop) + str(e)
         if len(er) > 0:
-            raise ValueError("Element FlightBooking can't be created: " + er)
+            raise ValueError("Element Booking can't be created: " + er)
 
     @property
     def Name(self):
@@ -59,13 +59,11 @@ class Booking:
 
     def __str__(self):
         d = self.props()
-        #print(d)
         data = "\n".join("{} : {}".format(prop, val) for prop, val in d.items())
         return "Booking: \n" + data + "\n"
 
     def props(self):
         d = dict((i[1:], str(getattr(self, i[1:]))) for i in self.__dict__.keys())
-        #d["date"] = self._date.strftime('%d.%m.%Y')
         return d
 
     @staticmethod

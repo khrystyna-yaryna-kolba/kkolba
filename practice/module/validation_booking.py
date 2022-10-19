@@ -18,7 +18,7 @@ class ValidationBooking:
     @staticmethod
     def validate_name(func):
         def inner(f, n):
-            if not re.search(r"[a-zA-z]+", n):
+            if not re.search(r"^[a-zA-z]+$", n):
                 raise ValueError("invalid format of booking name")
             return func(f,n)
         return inner
@@ -26,7 +26,7 @@ class ValidationBooking:
     @staticmethod
     def validate_price(func):
         def inner(f, n):
-            if not re.search(r"[0-9]+\.[0-9]{2}$", str(n)):
+            if not re.search(r"^[0-9]+\.[0-9]{2}$", str(n)):
                 raise ValueError("invalid price")
             return func(f,n)
         return inner
