@@ -1,10 +1,6 @@
 from booking_collection import BookingCollection
 from booking import Booking
 import sys
-"""f_bookings = BookingCollection()
-name = input("Input file name to read from(.json): \n")
-f_bookings.read_json_file(name)
-print(f_bookings)"""
 def menu():
     f_bookings = BookingCollection()
     while True:

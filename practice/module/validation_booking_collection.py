@@ -42,7 +42,7 @@ class ValidationBookingCollection:
             if col.ADD == 1:
                 col.ADD = 2
             else:
-                new_el.Price = float(new_el.Price) + 10.00
+                new_el.Price = round(float(new_el.Price) + 10.00, 2)
                 col.ADD = 1
             return func(col, new_el)
 
