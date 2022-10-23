@@ -1,6 +1,8 @@
 from context import Context
 from strategy import *
-from observer import Observer, Logger, Event
+from observer import Observer
+from logger import Logger
+from event import Event
 import sys
 import copy
 def menu():
@@ -28,12 +30,13 @@ def menu():
                 pos = input_int("position to remove")
                 lis_copy = copy.deepcopy(lis)
                 lis.remove(pos)
-                Event("remove", {"list before removal": lis_copy,"removal position": pos, "result list" : lis}).notify(observer)
+                Event("remove", {"list before removal": lis_copy,"removal position": pos, "result list" : lis}).notify(
+                    observer)
             elif choice == "5":
                 a, b = input_int_range()
                 lis_copy = copy.deepcopy(lis)
                 lis.remove_in_range(a,b)
-                Event("remove", {"list before removal in range": lis_copy, "removal range": ( a, b), "result list": lis}).notify(
+                Event("remove", {"list before removal in range": lis_copy, "removal range": (a, b), "result list": lis}).notify(
                     observer)
             elif choice == "6":
                 k = input_int("input k to perform transform method with current list")
@@ -50,6 +53,9 @@ def menu():
             continue
 
         if choice == "8":
+            observer.unsubscribe("add")
+            observer.unsubscribe("remove")
+            observer.unsubscribe("transform")
             exit()
         else:
             continue
