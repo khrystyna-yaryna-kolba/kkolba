@@ -49,7 +49,7 @@ def input_non_negative_int(text):
             return input_positive_int(text)
     except:
         print("you didn't enter an integer, try again")
-        return input_positive_int(text)
+        return input_non_negative_int(text)
     return n
 
 def print_matrix(matrix):

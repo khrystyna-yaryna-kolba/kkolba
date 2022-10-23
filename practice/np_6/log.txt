@@ -1,0 +1,12 @@
+
+Event add:  list before add:  , pos to add: 0 , result list: 3 4 -2 1 2 -8 54 140 -7
+
+Event remove:  list before removal: 3 4 -2 1 2 -8 54 140 -7 , removal position: 0 , result list: 4 -2 1 2 -8 54 140 -7
+
+Event remove:  list before removal: 4 -2 1 2 -8 54 140 -7 , removal position: 2 , result list: 4 -2 2 -8 54 140 -7
+
+Event remove:  list before removal in range: 4 -2 2 -8 54 140 -7 , removal range: (2, 4) , result list: 4 -2 140 -7
+
+Event transform:  list before transforming: 4 -2 140 -7 , k: 0 , result list: -2 -7 4 140
+
+Event transform:  list before transforming: -2 -7 4 140 , k: 4 , result list: -2 -7 4 0 140
