@@ -1,10 +1,10 @@
 [
   {
-    "Name" : "3first",
+    "Name" : "first",
     "NoOfPeople" : "9",
     "StartTime" : "12:00",
-    "EndTime" : "13:30",
-    "Price": "2334.43"
+    "EndTime" : "14:30",
+    "Price": "2334.45"
   },
   {
     "Name" : "second",
@@ -15,14 +15,14 @@
   },
   {
     "Name" : "third",
-    "NoOfPeople" : "2",
+    "NoOfPeople" : "9",
     "StartTime" : "13:00",
     "EndTime" : "13:30",
     "Price": "55.76"
   },
   {
     "Name" : "forth",
-    "NoOfPeople" : "0",
+    "NoOfPeople" : "9",
     "StartTime" : "13:00",
     "EndTime" : "13:30",
     "Price": "23.53"
