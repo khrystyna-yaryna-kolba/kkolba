@@ -28,6 +28,7 @@ class ValidationBooking:
         def inner(f, n):
             if not re.search(r"^[0-9]+\.[0-9]{2}$", str(n)):
                 raise ValueError("invalid price")
+            n = float(n)
             return func(f,n)
         return inner
 

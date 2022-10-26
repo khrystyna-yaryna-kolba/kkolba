@@ -38,11 +38,25 @@ class ValidationBookingCollection:
             if tot_people + new_el.NoOfPeople > MAX_PEOPLE:
                 raise ValueError("can't register more than {} at the same time".format(MAX_PEOPLE))
 
+            """for i in range(len(col)):
+                if col[i].StartTime < new_el.StartTime:
+                    if new_el.StartTime < col[i].EndTime:
+                        tot_people += col[i].NoOfPeople
+                elif new_el.StartTime < col[i].StartTime :
+                    if col[i].EndTime < new_el.StartTime:
+                        tot_people += col[i].NoOfPeople
+                else:
+                    tot_people += col[i].NoOfPeople
+            if tot_people + new_el.NoOfPeople > MAX_PEOPLE:
+                raise ValueError("can't register more than {} at the same time".format(MAX_PEOPLE))"""
+
+
             #automatic raise
             if col.ADD == 1:
                 col.ADD = 2
             else:
-                new_el.Price = round(float(new_el.Price) + 10.00, 2)
+                #new_el.Price = round(float(new_el.Price) + 10.00, 2)
+                new_el.Price = "{:.2f}".format(new_el.Price + 10.00)
                 col.ADD = 1
             return func(col, new_el)
 

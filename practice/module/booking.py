@@ -59,6 +59,7 @@ class Booking:
 
     def __str__(self):
         d = self.props()
+        d["Price"] = "{:.2f}".format(float(d["Price"]))
         data = "\n".join("{} : {}".format(prop, val) for prop, val in d.items())
         return "Booking: \n" + data + "\n"
 
