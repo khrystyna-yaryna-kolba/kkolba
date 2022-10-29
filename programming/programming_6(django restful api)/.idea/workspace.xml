@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="696c0115-9436-4f58-8208-655e41b40f30" name="Changes" comment="" />
+    <list default="true" id="696c0115-9436-4f58-8208-655e41b40f30" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rest_api1/rest_api1/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rest_api1/rest_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/rest_api1/rest_app/views.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

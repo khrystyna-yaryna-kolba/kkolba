@@ -57,6 +57,7 @@ class ContainerIDView(APIView):
             return Response({"status": "error", "errors": "can`t perform delete request without specified id in it"},
                             status=status.HTTP_400_BAD_REQUEST)
 
+
 class ContainerView(APIView):
 
     def get(self, request):
@@ -65,7 +66,6 @@ class ContainerView(APIView):
         -- get by params (params : sort_by (field), sort_type(asc|desc), s(search by))
         """
         sort_by, sort_type, s = request.query_params.get("sort_by"), request.query_params.get("sort_type"), request.query_params.get("s")
-        print(sort_by, sort_type, s)
         res = Containers.search(sort_by, sort_type, s)
         serializers = ContainerSerializer(res, many=True)
         return Response({'status': 'success', "containers": serializers.data}, status=200)
