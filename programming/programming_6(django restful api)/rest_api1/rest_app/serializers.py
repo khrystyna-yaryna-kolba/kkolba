@@ -6,6 +6,13 @@ from datetime import datetime
 from .serializers_validation import SerializerValidation
 
 class ContainerSerializer(serializers.ModelSerializer):
+    ID = serializers.IntegerField(min_value=0)
+    number = serializers.CharField(max_length=8)
+    departure_city = serializers.CharField(max_length=50)
+    arrival_city = serializers.CharField(max_length=50)
+    departure_date = serializers.DateField()
+    arrival_date = serializers.DateField()
+    amount_of_items = serializers.IntegerField(min_value=0)
     """
     ContainerSerializer class that is responsible for transforming json data to our Containers Model
     and vice-versa

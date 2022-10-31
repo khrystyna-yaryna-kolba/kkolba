@@ -20,7 +20,7 @@ class ContainerIDView(APIView):
         try:
             result = Containers.objects.get(ID=id)
             containers = ContainerSerializer(result)
-            return Response({'status': 'success', "containers": containers.data}, status=200)
+            return Response({'status': '200', "data": containers.data}, status=status.HTTP_200_OK)
         except Containers.DoesNotExist as d:
             return Response({'status': '404', "message": "Container with id {} was not found".format(id)},
                             status=status.HTTP_404_NOT_FOUND)
@@ -38,9 +38,9 @@ class ContainerIDView(APIView):
             serializer = ContainerSerializer(result, data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return Response({"status": "success", "message" : "Container with id {} was successfuly updated".format(id),"data": serializer.data}, status=status.HTTP_200_OK)
+                return Response({"status": "200", "message" : "Container with id {} was successfuly updated".format(id),"data": serializer.data}, status=status.HTTP_200_OK)
             else:
-                return Response({"status": "error", "message": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({"status": "400", "message": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
         except Containers.DoesNotExist as d:
             return Response({'status': '404', "message": "Container with id {} was not found".format(id)}, status=status.HTTP_404_NOT_FOUND)
 
@@ -49,14 +49,9 @@ class ContainerIDView(APIView):
         DELETE METHOD
         --delete by id
         """
-        if id:
-            result = get_object_or_404(Containers, ID=id)
-            result.delete()
-            return Response({"status": "success", "message": "Record with id {} deleted".format(id)})
-        else:
-            return Response({"status": "error", "errors": "can`t perform delete request without specified id in it"},
-                            status=status.HTTP_400_BAD_REQUEST)
-
+        result = get_object_or_404(Containers, ID=id)
+        result.delete()
+        return Response({"status": "200", "message": "Container with id {} deleted".format(id)}, status=status.HTTP_200_OK)
 
 class ContainerView(APIView):
 
@@ -68,7 +63,7 @@ class ContainerView(APIView):
         sort_by, sort_type, s = request.query_params.get("sort_by"), request.query_params.get("sort_type"), request.query_params.get("s")
         res = Containers.search(sort_by, sort_type, s)
         serializers = ContainerSerializer(res, many=True)
-        return Response({'status': 'success', "containers": serializers.data}, status=200)
+        return Response({'status': '200', "data": serializers.data}, status=status.HTTP_200_OK)
 
     def post(self, request):
         """
@@ -79,8 +74,8 @@ class ContainerView(APIView):
             try:
                 serializer.save()
             except IntegrityError as e:
-                return Response({"status": "error", "message": "Can`t add Container with ID {}! It is already in the database".format(request.data["ID"])}, status=status.HTTP_400_BAD_REQUEST)
-            return Response({"status": "success", "message" : "Container was succesfully created and added to database","data": serializer.data}, status=status.HTTP_200_OK)
+                return Response({"status": "409", "message": "Can`t add Container with ID {}! It is already in the database".format(request.data["ID"])}, status=status.HTTP_409_CONFLICT)
+            return Response({"status": "201", "message" : "Container was succesfully created and added to database","data": serializer.data}, status=status.HTTP_201_CREATED)
         else:
-            return Response({"status": "error", "message": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"status": "400", "message": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
