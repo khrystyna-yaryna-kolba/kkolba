@@ -7,7 +7,6 @@ from .city.city import City
 class SerializerValidation:
     @staticmethod
     def validate_number(num):
-        print("validATING NUMBER  in serializer!!!!!!!")
         if not re.search(r"^[A-Z]{2}-[0-9]{5}$", num):
             raise serializers.ValidationError("invalid format of container number")
         return num

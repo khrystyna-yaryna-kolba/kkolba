@@ -51,7 +51,10 @@ class ContainerSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         # if we want to change id we can`t do it directly
         # but, we can just delete element with current id and create new
-        if instance.ID != validated_data["ID"]:
+        if int(instance.ID) != int(validated_data["ID"]):
+            duplicat = Containers.objects.filter(ID=validated_data["ID"])
+            if duplicat:
+                return instance
             instance.delete()
             instance = Containers(**validated_data)
             instance.save()

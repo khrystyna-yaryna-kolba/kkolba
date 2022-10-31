@@ -29,13 +29,22 @@ class ContainerIDView(APIView):
         """
         PUT METHOD
         --put by id
-        (should contain all fields(except id)!!!)
+        (should contain all fields(may be except id)!!!)
+
+        !!!can change id
         """
         try:
             result = Containers.objects.get(ID=id)
             data = request.data
             data["ID"] = id if "ID" not in data else data["ID"]
-            serializer = ContainerSerializer(result, data=request.data)
+            #if want to change id:
+            if int(id) != int(data["ID"]):
+                duplicat = Containers.objects.filter(ID=data["ID"])
+                if duplicat:
+                    return Response({"status": "409",
+                                     "message": "Can`t put Container with ID {}! It is already in the database".format(
+                                         request.data["ID"])}, status=status.HTTP_409_CONFLICT)
+            serializer = ContainerSerializer(result, data=data)
             if serializer.is_valid():
                 serializer.save()
                 return Response({"status": "200", "message" : "Container with id {} was successfuly updated".format(id),"data": serializer.data}, status=status.HTTP_200_OK)
@@ -49,9 +58,13 @@ class ContainerIDView(APIView):
         DELETE METHOD
         --delete by id
         """
-        result = get_object_or_404(Containers, ID=id)
-        result.delete()
-        return Response({"status": "200", "message": "Container with id {} deleted".format(id)}, status=status.HTTP_200_OK)
+        try:
+            result = Containers.objects.get(ID=id)
+            result.delete()
+            return Response({"status": "200", "message": "Container with id {} deleted".format(id)}, status=status.HTTP_200_OK)
+        except Containers.DoesNotExist as d:
+            return Response({'status': '404', "message": "Container with id {} was not found, can`t delete".format(id)},
+                            status=status.HTTP_404_NOT_FOUND)
 
 class ContainerView(APIView):
 
