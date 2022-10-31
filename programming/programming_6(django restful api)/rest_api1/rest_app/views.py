@@ -18,12 +18,15 @@ class ContainerIDView(APIView):
         -- get by id (in case with endpoint with specified id)
         """
         try:
+            int(id)
             result = Containers.objects.get(ID=id)
             containers = ContainerSerializer(result)
             return Response({'status': '200', "data": containers.data}, status=status.HTTP_200_OK)
         except Containers.DoesNotExist as d:
             return Response({'status': '404', "message": "Container with id {} was not found".format(id)},
                             status=status.HTTP_404_NOT_FOUND)
+        except ValueError:
+            return Response({"status": "400", "message": "invalid url (id)"}, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, id):
         """
@@ -52,19 +55,23 @@ class ContainerIDView(APIView):
                 return Response({"status": "400", "message": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
         except Containers.DoesNotExist as d:
             return Response({'status': '404', "message": "Container with id {} was not found".format(id)}, status=status.HTTP_404_NOT_FOUND)
-
+        except ValueError:
+            return Response({"status": "400", "message": "invalid url (id)"}, status=status.HTTP_400_BAD_REQUEST)
     def delete(self, request, id):
         """
         DELETE METHOD
         --delete by id
         """
         try:
+            int(id)
             result = Containers.objects.get(ID=id)
             result.delete()
             return Response({"status": "200", "message": "Container with id {} deleted".format(id)}, status=status.HTTP_200_OK)
         except Containers.DoesNotExist as d:
             return Response({'status': '404', "message": "Container with id {} was not found, can`t delete".format(id)},
                             status=status.HTTP_404_NOT_FOUND)
+        except ValueError:
+            return Response({"status": "400", "message": "invalid url (id)"}, status=status.HTTP_400_BAD_REQUEST)
 
 class ContainerView(APIView):
 
