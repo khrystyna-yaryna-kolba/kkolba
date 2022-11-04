@@ -45,7 +45,7 @@ container_schema_dict = openapi.Schema(
     }
 )
 
-sort_by = openapi.Parameter(name='field to sort by', description='number(default)', enum = Containers.default_props(), in_=openapi.IN_QUERY,
+sort_by = openapi.Parameter(name='sort_by', description='number(default)', enum = Containers.default_props(), in_=openapi.IN_QUERY,
                            type=openapi.TYPE_STRING)
 sort_type = openapi.Parameter(name="sort_type", description='desc or asc(default)',enum=["asc", "desc"], in_=openapi.IN_QUERY,
                            type=openapi.TYPE_STRING)
@@ -58,23 +58,12 @@ limit = openapi.Parameter(name="limit", description='limit (number of items to r
 
 response_get_all = {
     "200": openapi.Response(
-        description="request is valid, status: status code, data: list of results (list of containers objects), "
-                    "count(total number of items (may be different than a length of data list when offset and limit "
-                    "is used))",
+        description="request is valid, status: status code, count(total number of items), data: list of results (list of containers objects)",
         examples={
             "application/json": {
                 "status": "200",
-                "data": [get_example(container_schema_dict)],
                 "count" : 2,
-            }
-        }
-    ),
-    "400": openapi.Response(
-        description="bad limit or offset parameter",
-        examples={
-            "application/json": {
-                "status": "400",
-                "massage": "That page number is less than 1",
+                "data": [get_example(container_schema_dict)],
             }
         }
     ),

@@ -5,19 +5,62 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Containers
 from .serializers import ContainerSerializer
-from django.shortcuts import get_object_or_404
 from django.db import IntegrityError
 from django.core.paginator import Paginator, InvalidPage
 # from django.core.exceptions import ValidationError
 from drf_yasg.utils import swagger_auto_schema
 from .swagger import container_schema_dict, limit, offset, sort_type, sort_by, s
 from .swagger import response_get_all, response_get_by_id, response_post, response_put, response_delete
-# from django.core.exceptions import ValidationError
+from rest_framework import generics, filters
+from .custom_filters import SortBySortType
+from .custom_pagination import CustomPagination
 # Create your views here.
+
+class ContainerListCreateApiView(generics.ListCreateAPIView):
+    queryset = Containers.objects.all()
+    serializer_class = ContainerSerializer
+    pagination_class = CustomPagination
+    filter_backends = [SortBySortType, filters.SearchFilter]
+    ordering_fields = Containers.default_props()
+    ordering = "number"
+    search_fields = Containers.default_props()
+    http_method_names = ['get', 'post']
+    @swagger_auto_schema(
+        manual_parameters=[sort_by, sort_type, s, offset, limit],
+        responses=response_get_all
+    )
+    def get(self, request, *args, **kwargs):
+        """
+        get from whole collection of containers
+        """
+        return super().get(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        responses=response_post,
+        request_body=container_schema_dict,
+    )
+    def post(self, request, *args, **kwargs):
+        """
+        add new container to database
+        """
+        serializer = ContainerSerializer(data=request.data)
+        if serializer.is_valid():
+            try:
+                serializer.save()
+            except IntegrityError as e:
+                return Response({"status": "409",
+                                 "message": "Can`t add Container with ID {}! It is already in the database".format(
+                                     request.data["ID"])}, status=status.HTTP_409_CONFLICT)
+            return Response({"status": "201", "message": "Container was succesfully created and added to database",
+                             "data": serializer.data}, status=status.HTTP_201_CREATED)
+        else:
+            return Response({"status": "400", "message": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 class ContainerIDView(APIView):
-    #serializer_class = ContainerSerializer
+    serializer_class = ContainerSerializer
+    http_method_names = ['get', 'put', 'delete']
 
     @swagger_auto_schema(
         responses=response_get_by_id
@@ -93,16 +136,17 @@ class ContainerIDView(APIView):
         except ValueError:
             return Response({"status": "400", "message": "invalid url (id)"}, status=status.HTTP_400_BAD_REQUEST)
 
-class ContainerView(APIView):
+
+"""class ContainerView(APIView):
     @swagger_auto_schema(
         manual_parameters=[sort_by, sort_type, s, offset, limit],
         responses=response_get_all
     )
     def get(self, request):
-        """
+        
         GET METHOD
          -- get by params (params : sort_by (field), sort_type(asc|desc), s(search by), offset(number of items to skip(limit*offset)), limit(number of items to return))
-        """
+        
         sort_by, sort_type, s = request.query_params.get("sort_by"), request.query_params.get(
             "sort_type"), request.query_params.get("s")
         offset, limit = request.query_params.get("offset"), request.query_params.get("limit")
@@ -125,10 +169,10 @@ class ContainerView(APIView):
         request_body=container_schema_dict,
     )
     def post(self, request):
-        """
+        
         POST METHOD
         add new container to database
-        """
+        
         serializer = ContainerSerializer(data=request.data)
         if serializer.is_valid():
             try:
@@ -137,5 +181,5 @@ class ContainerView(APIView):
                 return Response({"status": "409", "message": "Can`t add Container with ID {}! It is already in the database".format(request.data["ID"])}, status=status.HTTP_409_CONFLICT)
             return Response({"status": "201", "message" : "Container was succesfully created and added to database","data": serializer.data}, status=status.HTTP_201_CREATED)
         else:
-            return Response({"status": "400", "message": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"status": "400", "message": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)"""
 
