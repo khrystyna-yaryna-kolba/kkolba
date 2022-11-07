@@ -135,8 +135,8 @@ response_post = {
 }
 
 response_put = {
-    "201": openapi.Response(
-        description="element was created and added to database",
+    "200": openapi.Response(
+        description="element was updated",
         examples={
             "application/json": {
                 "status": "201",

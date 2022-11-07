@@ -90,7 +90,7 @@ class ContainerIDView(APIView):
         """
         PUT METHOD
         --put by id
-        (should contain all fields(may be except id)!!!)
+        request body should contain all fields (maybe without id if you don`t want to change it)
         !!!can change id
         """
         try:
