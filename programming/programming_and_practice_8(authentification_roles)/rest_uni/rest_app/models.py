@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.core.validators import RegexValidator, MinValueValidator
 from django.db import models
-from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.contrib.auth.models import BaseUserManager, AbstractUser
 from .models_validation import ContainerValidation
 # Create your models here.
 """Клас КОНТЕЙНЕР: ID, number (format: AB-12345), departure_city(enum),
@@ -93,14 +93,10 @@ class UserManager(BaseUserManager):
 
 class UserData(AbstractUser):
     username = None
-    first_name = models.CharField(max_length=100, unique=True)
-    last_name = models.CharField(max_length=100, unique=True)
+    last_login =None
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
     email = models.EmailField(max_length=100, unique=True)
-    #date_joined = models.DateTimeField(auto_now_add=True)
-    #is_admin = models.BooleanField(default=False)
-    #is_active = models.BooleanField(default=True)
-    #is_staff = models.BooleanField(default=False)
-    #is_superuser = models.BooleanField(default=False)
 
     objects = UserManager()
 
